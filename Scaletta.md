@@ -16,7 +16,11 @@
 6. Strutturare layout main;
 
 
-
 ## create rotta api per categorie e tags
+1. In routes\api.php inserire le rotte;
+2. Creare un metodo per estrapolare l'api dei posts;
+3. Effettuare la chiamata axios;
+
 ## fate chiamate ajax con axios per recuperare i dati
+Fatto
 ## implementate la paginazione
