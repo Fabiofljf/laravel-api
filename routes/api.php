@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Creazione rotte 
+Route::get('posts', 'API/PostController@index');
+Route::get('categories', 'API/CategoryController@index');
+Route::get('tags', 'API/TagController@index');
