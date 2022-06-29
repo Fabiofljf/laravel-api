@@ -5168,6 +5168,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -5176,7 +5186,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: ""
+      posts: "",
+      categories: "",
+      tags: ""
     };
   },
   methods: {
@@ -5187,11 +5199,40 @@ __webpack_require__.r(__webpack_exports__);
         //console.log(response);
         //console.log(response.data);
         _this.posts = response.data;
+      })["catch"](function (e) {
+        console.error(e);
+      });
+    },
+    trimText: function trimText(text) {
+      if (text.length > 100) {
+        return text.slide(0, 100);
+      }
+
+      return text;
+    },
+    getCallCategories: function getCallCategories() {
+      var _this2 = this;
+
+      axios.get("/api/categories").then(function (response) {
+        _this2.categories = response.data;
+      })["catch"](function (e) {
+        console.error(e);
+      });
+    },
+    getCallTags: function getCallTags() {
+      var _this3 = this;
+
+      axios.get("/api/tags").then(function (response) {
+        _this3.tags = response.data;
+      })["catch"](function (e) {
+        console.error(e);
       });
     }
   },
   mounted: function mounted() {
     this.getCallPosts();
+    this.getCallCategories();
+    this.getCallTags();
   }
 });
 
@@ -27973,7 +28014,7 @@ var render = function () {
             "div",
             { staticClass: "col-10 d-flex flex-wrap" },
             _vm._l(_vm.posts, function (post) {
-              return _c("div", { key: post.id, staticClass: "col g-3" }, [
+              return _c("div", { key: post.id, staticClass: "col p-3" }, [
                 _c("div", { staticClass: "card text-start" }, [
                   _c("img", {
                     staticClass: "card-img-top",
@@ -27986,7 +28027,7 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(post.content)),
+                      _vm._v(_vm._s("trimText(post.content)")),
                     ]),
                   ]),
                 ]),
@@ -27995,7 +28036,39 @@ var render = function () {
             0
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "div",
+              { staticClass: "col" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.categories, function (category) {
+                  return _c("ul", { key: category.id }, [
+                    _c("li", [_vm._v(_vm._s(category.name))]),
+                  ])
+                }),
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col mt-4" },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._l(_vm.tags, function (tag) {
+                  return _c("ul", { key: tag.id }, [
+                    _c("li", { staticClass: "btn btn-primary" }, [
+                      _vm._v(_vm._s(tag.name)),
+                    ]),
+                  ])
+                }),
+              ],
+              2
+            ),
+          ]),
         ]),
       ]),
     ],
@@ -28007,11 +28080,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("div", { staticClass: "col" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }),
+    return _c("h4", { staticClass: "p-2" }, [
+      _c("strong", [_vm._v("Categories:")]),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "p-2" }, [_c("strong", [_vm._v("Tags:")])])
   },
 ]
 render._withStripped = true
