@@ -11,6 +11,10 @@
 1. Bozza struttura layout main;
 2. Creo i nuovi controller API/(Controllers);
 3. In routes\api.php inserire le rotte;
+4. Creare un metodo per estrapolare l'api dei posts;
+5. Effettuare la chiamata axios;
+6. Strutturare layout main;
+
 
 
 ## create rotta api per categorie e tags
